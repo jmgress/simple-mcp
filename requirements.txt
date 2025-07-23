@@ -1,0 +1,3 @@
+# Core dependencies for simple-mcp
+mcp>=1.0.0
+anyio>=3.0.0

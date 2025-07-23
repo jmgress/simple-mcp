@@ -6,7 +6,6 @@ from typing import Any, Dict, Optional
 
 from mcp.server.fastmcp import FastMCP
 from mcp import types
-from mcp.server import stdio
 
 
 class ValueStore:
@@ -169,7 +168,7 @@ def get_store_info() -> str:
     return info
 
 
-async def main():
+def main():
     """Main entry point for the MCP server."""
     # Initialize with some sample data for demonstration
     value_store.set("greeting", "Hello, World!")
@@ -179,19 +178,13 @@ async def main():
     
     print(f"Starting simple-mcp-server with {value_store.size()} sample values...", file=sys.stderr)
     
-    # Run the server using stdio transport
-    async with stdio.stdio_server() as (read_stream, write_stream):
-        await app.run(
-            read_stream,
-            write_stream,
-            app.create_initialization_options()
-        )
+    # Run the server using stdio transport - FastMCP handles the asyncio loop
+    app.run("stdio")
 
 
 def cli_main():
-    """CLI entry point that handles asyncio setup."""
-    import asyncio
-    asyncio.run(main())
+    """CLI entry point."""
+    main()
 
 
 if __name__ == "__main__":
