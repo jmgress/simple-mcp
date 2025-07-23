@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "simple-mcp": {
+      "command": "simple-mcp-server"
+    }
+  }
+}
